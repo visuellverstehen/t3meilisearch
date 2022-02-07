@@ -1,0 +1,5 @@
+# cat=General; type=string; label=LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:host
+host=127.0.0.1
+
+# cat=General; type=string; label=LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:api_key
+apiKey=
