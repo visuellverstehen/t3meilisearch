@@ -1,0 +1,23 @@
+{
+  "name": "visuellverstehen/t3meilisearch",
+  "description": "Extension to use Meilisearch as search.",
+  "type": "typo3-cms-extension",
+  "require": {
+    "typo3/cms-core": "^10.4 || ^11.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "VV\\T3meilisearch\\": "Classes/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "VV\\T3meilisearch\\Tests\\": "Tests/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "t3meilisearch"
+    }
+  }
+}

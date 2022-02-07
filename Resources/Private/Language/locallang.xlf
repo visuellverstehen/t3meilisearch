@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="EXT:t3meilisearch/Resources/Private/Language/locallang.xlf" date="2022-02-07T11:23:42Z" product-name="t3meilisearch">
+        <header/>
+        <body>
+            <trans-unit id="host" resname="no_modules_registered">
+                <source>Host</source>
+            </trans-unit>
+            <trans-unit id="api_key" resname="no_modules_registered">
+                <source>Enter your private API key</source>
+            </trans-unit>
+
+            <trans-unit id="pi1" resname="no_modules_registered">
+                <source>Searchform with results</source>
+            </trans-unit>
+            <trans-unit id="pi2" resname="no_modules_registered">
+                <source>Searchform</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
