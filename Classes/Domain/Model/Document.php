@@ -11,6 +11,7 @@ class Document
     protected string $title = '';
     protected string $link = '';
     protected string $content = '';
+    protected array $_formatted = [];
 
     public function getUid(): int
     {
@@ -50,6 +51,15 @@ class Document
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    public function setFormatted(array $formatted): void
+    {
+        $this->_formatted = $formatted;
+
+        if ($this->_formatted['content']) {
+            $this->setContent($formatted['content']);
+        }
     }
 
     public static function createFromRequest(Request $request, Response $response): Document

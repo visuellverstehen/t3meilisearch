@@ -45,7 +45,11 @@ class SearchService implements SingletonInterface
     public function search(string $query, int $rootPageId): ObjectStorage
     {
         $result = new ObjectStorage();
-        $hits = $this->indexService->search($query)->getHits();
+        $hits = $this->indexService->search($query, [
+            'attributesToCrop' => [
+                'content'
+            ]
+        ])->getHits();
 
         foreach($hits as $hit) {
             $document = $this->propertyMapper->convert($hit, Document::class);

@@ -28,10 +28,10 @@ class IndexService implements SingletonInterface
         $index->addDocuments($document->toArray());
     }
 
-    public function search(string $query): SearchResult
+    public function search(string $query, array $params = []): SearchResult
     {
         $index = $this->client->index($this->index);
 
-        return $index->search($query);
+        return $index->search($query, $params);
     }
 }
