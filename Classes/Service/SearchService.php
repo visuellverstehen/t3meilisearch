@@ -1,9 +1,12 @@
 <?php
 
-namespace VV\T3meilisearch\Controller;
+namespace VV\T3meilisearch\Service;
 
+use MeiliSearch\Search\SearchResult;
+use TYPO3\CMS\Core\SingletonInterface;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 // use TYPO3\CMS\Core\Context\Context;
 // use TYPO3\CMS\Core\Database\Connection;
 // use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -21,47 +24,35 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 // use TYPO3\CMS\Core\Utility\RootlineUtility;
 // use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Property\PropertyMapper;
 // use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 // use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 // use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
 // use TYPO3\CMS\IndexedSearch\Lexer;
-// use TYPO3\CMS\IndexedSearch\Utility\IndexedSearchUtility;
-use VV\T3meilisearch\Service\SearchService;
+use VV\T3meilisearch\Domain\Model\Document;
 
-class SearchController extends ActionController
+class SearchService implements SingletonInterface
 {
-    protected SearchService $searchService;
+    protected IndexService $indexService;
+    protected PropertyMapper $propertyMapper;
 
-    public function injectSearchService(SearchService $searchService)
+    public function __construct(IndexService $indexService, PropertyMapper $propertyMapper)
     {
-        $this->searchService = $searchService;
+        $this->indexService = $indexService;
+        $this->propertyMapper = $propertyMapper;
     }
 
-    public function searchAction(): ResponseInterface
+    public function search(string $query, int $rootPageId): ObjectStorage
     {
-        $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('t3meilisearch');
-        $rootPageId = $this->request->getAttribute('site')->getRootPageId();
-        $query = $this->request->getQueryParams()['query'] ?? '';
+        $result = new ObjectStorage();
+        $hits = $this->indexService->search($query)->getHits();
 
-        $results = $this->searchService->search($query, $rootPageId);
+        foreach($hits as $hit) {
+            $document = $this->propertyMapper->convert($hit, Document::class);
 
-        $this->view->assignMultiple(compact(
-            'settings',
-            'query',
-            'results',
-        ));
+            $result->attach($document);
+        }
 
-        return $this->htmlResponse();
-    }
-
-    public function formAction(): ResponseInterface
-    {
-        $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('t3meilisearch');
-
-        $this->view->assignMultiple(compact(
-            'settings',
-        ));
-
-        return $this->htmlResponse();
+        return $result;
     }
 }

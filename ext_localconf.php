@@ -12,10 +12,10 @@ ExtensionUtility::configurePlugin(
     'T3meilisearch',
     'Pi1',
     [
-        SearchController::class => 'form,search',
+        SearchController::class => 'search',
     ],
     [
-        SearchController::class => 'form,search',
+        SearchController::class => 'search',
     ],
 );
 
@@ -23,10 +23,10 @@ ExtensionUtility::configurePlugin(
     'T3meilisearch',
     'Pi2',
     [
-        SearchController::class => 'miniSearch',
+        SearchController::class => 'form',
     ],
     [
-        SearchController::class => 'miniSearch',
+        SearchController::class => '',
     ],
 );
 

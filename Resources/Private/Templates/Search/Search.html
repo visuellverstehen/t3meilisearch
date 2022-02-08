@@ -1,0 +1,13 @@
+<f:render partial="Form" arguments="{_all}" />
+
+<f:if condition="{results -> f:count()} > 0">
+    <f:then>
+        <h2>{results -> f:count()} Result(s) found</h2>
+        <f:for each="{results}" as="result">
+            <f:render partial="SearchResult" arguments="{result: result}" />
+        </f:for>
+    </f:then>
+    <f:else>
+        <p><f:translate key="empty_state" extensionName="t3meilisearch" /></p>
+    </f:else>
+</f:if>
