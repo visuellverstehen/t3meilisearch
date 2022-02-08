@@ -30,6 +30,12 @@ ExtensionUtility::configurePlugin(
     ],
 );
 
+// Show core checkbox to exclude pages from indexing
+ExtensionManagementUtility::addPageTSConfig('
+    TCEFORM.pages.no_search.disabled = 0
+');
+
+// Add content elements for plugins
 ExtensionManagementUtility::addPageTSConfig('
     mod.wizards.newContentElement.wizardItems.forms {
         elements {
