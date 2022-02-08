@@ -6,3 +6,6 @@ apiKey=
 
 # cat=General; type=int+; label=LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:target_pid
 targetPid=
+
+# cat=General; type=string; label=LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:target_pid
+index=pages
