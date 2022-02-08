@@ -3,3 +3,6 @@ host=127.0.0.1
 
 # cat=General; type=string; label=LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:api_key
 apiKey=
+
+# cat=General; type=int+; label=LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:target_pid
+targetPid=
