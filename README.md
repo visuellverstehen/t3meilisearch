@@ -86,7 +86,6 @@ plugin.tx_t3meilisearch {
         }
     }
 }
-
 ```
 
 Next you can copy and modify the default templates the way you like. It is important to replicate the namespace structure, otherwhise TYPO3 cannot find the templates and partials.
