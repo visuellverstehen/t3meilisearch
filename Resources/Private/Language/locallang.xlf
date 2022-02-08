@@ -12,6 +12,9 @@
             <trans-unit id="target_pid" resname="no_modules_registered">
                 <source>Target PID where the the search results live</source>
             </trans-unit>
+            <trans-unit id="index" resname="no_modules_registered">
+                <source>Index</source>
+            </trans-unit>
             <trans-unit id="empty_state" resname="no_modules_registered">
                 <source>No matching results found for your search request</source>
             </trans-unit>
