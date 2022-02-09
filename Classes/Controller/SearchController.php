@@ -40,10 +40,9 @@ class SearchController extends ActionController
     public function searchAction(): ResponseInterface
     {
         $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('t3meilisearch');
-        $rootPageId = $this->request->getAttribute('site')->getRootPageId();
         $query = $this->request->getQueryParams()['query'] ?? '';
 
-        $results = $this->searchService->search($query, $rootPageId);
+        $results = $this->searchService->search($query);
 
         $this->view->assignMultiple(compact(
             'settings',

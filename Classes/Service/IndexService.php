@@ -20,6 +20,12 @@ class IndexService implements SingletonInterface
         $this->settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('t3meilisearch');
         $this->client = new Client($this->settings['host'], $this->settings['apiKey']);
         $this->index = $this->settings['index'] ?? 'pages';
+
+        // TODO: Move this into an event listener or command and make
+        // settings public configurable
+        $this->client->index($this->index)->updateSettings([
+            'filterableAttributes' => ['pageUid'],
+        ]);
     }
 
     public function add(Document $document)

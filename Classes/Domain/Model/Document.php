@@ -13,20 +13,31 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
  */
 class Document extends AbstractDomainObject
 {
-    protected int $id = 0;
+    protected string $id = '';
+    protected int $pageUid = 0;
     protected string $title = '';
     protected string $link = '';
     protected string $content = '';
     protected array $_formatted = [];
 
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(string $id): void
     {
         $this->id = $id;
+    }
+
+    public function getPageUid(): int
+    {
+        return $this->pageUid;
+    }
+
+    public function setPageUid(int $pageUid): void
+    {
+        $this->pageUid = $pageUid;
     }
 
     public function getTitle(): string
@@ -71,7 +82,8 @@ class Document extends AbstractDomainObject
         preg_match('/<body>(.*?)<\/body>/s', $response->getBody()->__toString(), $content);
 
         $document = new Document();
-        $document->setId($GLOBALS['TSFE']->page['uid'] ?? 0);
+        $document->setId(md5($request->getUri()));
+        $document->setPageUid($GLOBALS['TSFE']->page['uid'] ?? 0);
         $document->setContent($content[0] ?? '');
         $document->setTitle($GLOBALS['TSFE']->page['title'] ?? '');
         $document->setLink($request->getUri());
@@ -83,6 +95,7 @@ class Document extends AbstractDomainObject
     {
         return [
             'id' => $this->id,
+            'pageUid' => $this->pageUid,
             'title' => $this->title,
             'link' => $this->link,
             'content' => $this->content,
