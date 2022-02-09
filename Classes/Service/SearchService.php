@@ -47,8 +47,11 @@ class SearchService implements SingletonInterface
         $result = new ObjectStorage();
         $hits = $this->indexService->search($query, [
             'attributesToCrop' => [
-                'content'
-            ]
+                'content',
+            ],
+            'attributesToHighlight' => [
+                'content',
+            ],
         ])->getHits();
 
         foreach($hits as $hit) {
