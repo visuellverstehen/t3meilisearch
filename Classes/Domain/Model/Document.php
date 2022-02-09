@@ -4,8 +4,14 @@ namespace VV\T3meilisearch\Domain\Model;
 
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Http\Request;
+use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 
-class Document
+/**
+ * This Document should only be a DTO but needs to extend
+ * the AbstractDomainObject in order to map the properties
+ * property. Not sure why, but without it does not work.
+ */
+class Document extends AbstractDomainObject
 {
     protected int $id = 0;
     protected string $title = '';
@@ -13,7 +19,7 @@ class Document
     protected string $content = '';
     protected array $_formatted = [];
 
-    public function getUid(): int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -53,12 +59,10 @@ class Document
         $this->content = $content;
     }
 
-    public function setFormatted(array $formatted): void
+    public function setFormatted(array $_formatted): void
     {
-        $this->_formatted = $formatted;
-
-        if ($this->_formatted['content']) {
-            $this->setContent($formatted['content']);
+        if ($_formatted['content']) {
+            $this->setContent($_formatted['content']);
         }
     }
 
