@@ -2,14 +2,8 @@
 
 namespace VV\T3meilisearch\Service;
 
-use MeiliSearch\Search\SearchResult;
 use TYPO3\CMS\Core\SingletonInterface;
-use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\RootlineUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use VV\T3meilisearch\Domain\Model\Document;
 
@@ -45,10 +39,10 @@ class SearchService implements SingletonInterface
                 'content',
             ],
             // Filter by checking the pageUid is in the rootline
-            'filter' => call_user_func(function() {
+            'filter' => call_user_func(function () {
                 $filters = [];
 
-                foreach($this->treeList as $pageUid) {
+                foreach ($this->treeList as $pageUid) {
                     $filters[] = 'pageUid = ' . $pageUid;
                 }
 
@@ -56,7 +50,7 @@ class SearchService implements SingletonInterface
             }),
         ])->getHits();
 
-        foreach($hits as $hit) {
+        foreach ($hits as $hit) {
             $document = $this->propertyMapper->convert($hit, Document::class);
 
             $result->attach($document);

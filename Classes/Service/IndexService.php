@@ -7,8 +7,8 @@ use MeiliSearch\Search\SearchResult;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use VV\T3meilisearch\Domain\Model\Document;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use VV\T3meilisearch\Domain\Model\Document;
 
 class IndexService implements SingletonInterface
 {

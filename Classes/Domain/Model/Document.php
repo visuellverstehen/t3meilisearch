@@ -2,8 +2,6 @@
 
 namespace VV\T3meilisearch\Domain\Model;
 
-use TYPO3\CMS\Core\Http\Response;
-use TYPO3\CMS\Core\Http\Request;
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
