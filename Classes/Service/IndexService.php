@@ -72,7 +72,7 @@ class IndexService implements SingletonInterface
             $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
             $document->setContent($content);
 
-            // $this->add($document);
+            $this->add($document);
         }
     }
 }
