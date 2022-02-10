@@ -15,7 +15,6 @@ jobs:
         run: composer global require --dev friendsofphp/php-cs-fixer --no-interaction --no-update
 
       - name: Check dir
-        run: ls -al /home/runner/.composer/vendor/bin
-
+        run: ls -al /home/runner/.composer/
       - name: Execute style check
         run: /home/runner/.composer/vendor/bin/php-cs-fixer fix --dry-run --diff
