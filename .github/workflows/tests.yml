@@ -15,4 +15,4 @@ jobs:
         run: composer global require --dev friendsofphp/php-cs-fixer --no-interaction --no-update
 
       - name: Execute style check
-        run: /home/runner/.composer/vendor/bin/php-cs-fixer fix --dry-run --diff
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff
