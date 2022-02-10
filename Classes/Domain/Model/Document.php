@@ -13,9 +13,9 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class Document extends AbstractDomainObject
 {
     protected string $id = '';
-    protected int $pageUid = 0;
+    protected int $rootPageId = 0;
     protected string $title = '';
-    protected string $link = '';
+    protected string $url = '';
     protected string $content = '';
     protected array $_formatted = [];
 
@@ -29,14 +29,14 @@ class Document extends AbstractDomainObject
         $this->id = $id;
     }
 
-    public function getPageUid(): int
+    public function getRootPageId(): int
     {
-        return $this->pageUid;
+        return $this->rootPageId;
     }
 
-    public function setPageUid(int $pageUid): void
+    public function setRootPageId(int $rootPageId): void
     {
-        $this->pageUid = $pageUid;
+        $this->rootPageId = $rootPageId;
     }
 
     public function getTitle(): string
@@ -49,14 +49,14 @@ class Document extends AbstractDomainObject
         $this->title = $title;
     }
 
-    public function getLink(): string
+    public function getUrl(): string
     {
-        return $this->link;
+        return $this->url;
     }
 
-    public function setLink(string $link): void
+    public function setUrl(string $url): void
     {
-        $this->link = $link;
+        $this->url = $url;
     }
 
     public function getContent(): string
@@ -82,10 +82,10 @@ class Document extends AbstractDomainObject
 
         $document = new Document();
         $document->setId(md5($tsfe->cObj->getRequest()->getUri()));
-        $document->setPageUid($tsfe->page['uid'] ?? 0);
+        $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
         $document->setContent($content[0] ?? '');
         $document->setTitle($tsfe->page['title'] ?? '');
-        $document->setLink($tsfe->cObj->getRequest()->getUri());
+        $document->setUrl($tsfe->cObj->getRequest()->getUri());
 
         return $document;
     }
@@ -94,9 +94,9 @@ class Document extends AbstractDomainObject
     {
         return [
             'id' => $this->id,
-            'pageUid' => $this->pageUid,
+            'rootPageId' => $this->rootPageId,
             'title' => $this->title,
-            'link' => $this->link,
+            'url' => $this->url,
             'content' => $this->content,
         ];
     }

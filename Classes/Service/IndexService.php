@@ -25,7 +25,7 @@ class IndexService implements SingletonInterface
         // TODO: Move this into an event listener or command and make
         // settings public configurable
         $this->client->index($this->index)->updateSettings([
-            'filterableAttributes' => ['pageUid'],
+            'filterableAttributes' => ['rootPageId'],
         ]);
     }
 

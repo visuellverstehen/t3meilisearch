@@ -11,16 +11,11 @@ class SearchService implements SingletonInterface
 {
     protected IndexService $indexService;
     protected PropertyMapper $propertyMapper;
-    protected array $treeList = [];
 
     public function __construct(IndexService $indexService, PropertyMapper $propertyMapper)
     {
         $this->indexService = $indexService;
         $this->propertyMapper = $propertyMapper;
-
-        $rootPageId = $GLOBALS['TSFE']->getSite()->getRootPageId();
-        $treeList = $GLOBALS['TSFE']->cObj->getTreeList($rootPageId, 5);
-        $this->treeList = explode(',', $treeList);
     }
 
     public function search(string $query): ObjectStorage
@@ -38,16 +33,10 @@ class SearchService implements SingletonInterface
             'attributesToHighlight' => [
                 'content',
             ],
-            // Filter by checking the pageUid is in the rootline
-            'filter' => call_user_func(function () {
-                $filters = [];
-
-                foreach ($this->treeList as $pageUid) {
-                    $filters[] = 'pageUid = ' . $pageUid;
-                }
-
-                return implode(' OR ', $filters);
-            }),
+            // Filter by checking the rootPageId is in the rootline
+            'filter' => [
+                'rootPageId = ' . $GLOBALS['TSFE']->getSite()->getRootPageId()
+            ],
         ])->getHits();
 
         foreach ($hits as $hit) {
