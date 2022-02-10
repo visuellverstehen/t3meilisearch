@@ -14,8 +14,5 @@ jobs:
       - name: Install requirements
         run: composer global require --dev friendsofphp/php-cs-fixer
 
-      - name: Check dir
-        run: ls -al /home/runner/.composer/
-
       - name: Execute style check
         run: /home/runner/.composer/vendor/bin/php-cs-fixer fix --dry-run --diff
