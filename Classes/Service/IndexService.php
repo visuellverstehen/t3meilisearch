@@ -8,6 +8,7 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use VV\T3meilisearch\Domain\Model\Document;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class IndexService implements SingletonInterface
 {
@@ -39,5 +40,16 @@ class IndexService implements SingletonInterface
         $index = $this->client->index($this->index);
 
         return $index->search($query, $params);
+    }
+
+    public function indexPageContent(array $parameters, TypoScriptFrontendController $tsfe)
+    {
+        if ((int) $tsfe->page['no_search'] === 1) {
+            return;
+        }
+
+        if ($tsfe->content !== '') {
+            $this->add(Document::createFromTSFE($tsfe));
+        }
     }
 }

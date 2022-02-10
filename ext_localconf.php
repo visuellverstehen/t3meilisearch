@@ -5,8 +5,12 @@ declare(strict_types=1);
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use VV\T3meilisearch\Controller\SearchController;
+use VV\T3meilisearch\Service\IndexService;
 
 defined('TYPO3') or die();
+
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-cached']['t3meilisearch']
+    = IndexService::class . '->indexPageContent';
 
 ExtensionUtility::configurePlugin(
     'T3meilisearch',

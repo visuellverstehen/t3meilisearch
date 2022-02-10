@@ -5,6 +5,7 @@ namespace VV\T3meilisearch\Domain\Model;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Http\Request;
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * This Document should only be a DTO but needs to extend
@@ -77,16 +78,16 @@ class Document extends AbstractDomainObject
         }
     }
 
-    public static function createFromRequest(Request $request, Response $response): Document
+    public static function createFromTSFE(TypoScriptFrontendController $tsfe): Document
     {
-        preg_match('/<body>(.*?)<\/body>/s', $response->getBody()->__toString(), $content);
+        preg_match('/<body>(.*?)<\/body>/s', $tsfe->content, $content);
 
         $document = new Document();
-        $document->setId(md5($request->getUri()));
-        $document->setPageUid($GLOBALS['TSFE']->page['uid'] ?? 0);
+        $document->setId(md5($tsfe->cObj->getRequest()->getUri()));
+        $document->setPageUid($tsfe->page['uid'] ?? 0);
         $document->setContent($content[0] ?? '');
-        $document->setTitle($GLOBALS['TSFE']->page['title'] ?? '');
-        $document->setLink($request->getUri());
+        $document->setTitle($tsfe->page['title'] ?? '');
+        $document->setLink($tsfe->cObj->getRequest()->getUri());
 
         return $document;
     }
