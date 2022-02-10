@@ -4,7 +4,9 @@ namespace VV\T3meilisearch\Service;
 
 use MeiliSearch\Client;
 use MeiliSearch\Search\SearchResult;
+use Spatie\PdfToText\Pdf;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -50,6 +52,27 @@ class IndexService implements SingletonInterface
 
         if ($tsfe->content !== '') {
             $this->add(Document::createFromTSFE($tsfe));
+        }
+
+        $this->checkForFiles($tsfe);
+    }
+
+    public function checkForFiles(TypoScriptFrontendController $tsfe)
+    {
+        // Extract links to PDFs in fileadmin to parse
+        preg_match('/\/fileadmin(.*)\.pdf/s', $tsfe->content, $links);
+
+        foreach ($links as $link) {
+            $absolutePath = Environment::getPublicPath() . $link;
+            $content = Pdf::getText($absolutePath);
+
+            $document = new Document();
+            // $document->setTitle();
+            $document->setUrl('/' . $link);
+            $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
+            $document->setContent($content);
+
+            // $this->add($document);
         }
     }
 }

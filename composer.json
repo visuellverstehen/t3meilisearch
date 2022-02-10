@@ -4,7 +4,8 @@
   "type": "typo3-cms-extension",
   "require": {
     "typo3/cms-core": "^10.4 || ^11.5",
-    "meilisearch/meilisearch-php": "^0.21"
+    "meilisearch/meilisearch-php": "^0.21",
+    "spatie/pdf-to-text": "^1.5"
   },
   "autoload": {
     "psr-4": {

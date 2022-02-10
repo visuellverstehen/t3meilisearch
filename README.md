@@ -4,6 +4,8 @@
 
 Install Meilisearch yourself and make sure it is running. Also make sure you get the host address the server is reachable at, because you will need to configure the extension with that host. Otherwhise the extension cannot communicate with Meilisearch.
 
+You will also need `poppler-utils` in order to index PDF files.
+
 ## Installation
 
 You can easily install the extension by using Composer:
