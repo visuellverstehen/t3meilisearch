@@ -12,9 +12,10 @@ jobs:
         run: sudo update-alternatives --set php /usr/bin/php8.0
 
       - name: Install requirements
-        run: composer global require --dev friendsofphp/php-cs-fixer --no-interaction --no-update
+        run: composer global require --dev friendsofphp/php-cs-fixer
 
       - name: Check dir
         run: ls -al /home/runner/.composer/
+
       - name: Execute style check
         run: /home/runner/.composer/vendor/bin/php-cs-fixer fix --dry-run --diff
