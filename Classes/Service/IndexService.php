@@ -64,11 +64,16 @@ class IndexService implements SingletonInterface
 
         foreach ($links as $link) {
             $absolutePath = Environment::getPublicPath() . $link;
-            $content = Pdf::getText($absolutePath);
+
+            try {
+                $content = Pdf::getText($absolutePath);
+            } catch(\Throwable $e) {
+                continue;
+            }
 
             $document = new Document();
-            // $document->setTitle();
-            $document->setUrl('/' . $link);
+            $document->setId(md5($link));
+            $document->setUrl($link);
             $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
             $document->setContent($content);
 
