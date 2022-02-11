@@ -60,7 +60,7 @@ Example:
 index=content
 ```
 
-Thats pretty much it. The extension registers a middleware which will save the content to the index you configured.
+Thats pretty much it. The extension will then index pages and pdfs after they've been cached.
 
 <a name="usage"></a>
 ## Usage
