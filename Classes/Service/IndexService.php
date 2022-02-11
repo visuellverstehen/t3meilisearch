@@ -67,7 +67,7 @@ class IndexService implements SingletonInterface
 
             try {
                 $content = Pdf::getText($absolutePath);
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 continue;
             }
 
