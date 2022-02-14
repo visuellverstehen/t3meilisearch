@@ -73,6 +73,18 @@ You can also use the »Searchform (Pi2)« plugin to only display a search form w
  <f:cObject typoscriptObjectPath="tt_content.list.20.t3meilisearch_pi2" />
 ```
 
+### Parsing content
+
+By default everything inbetween `<body></body>` is beeing indexed. You can limit this by using two HTML comments just like indexed_search does. If you use multiple blocks, only the first will be index.
+
+```html
+<!-- INDEX_CONTENT_START -->
+<p>This content will be indexed</p>
+<!-- INDEX_CONTENT_STOP -->
+
+<p>This content will NOT be indexed</p>
+```
+
 ### Overriding templates
 
 Because it's a basic TYPO3 extension build using Extbase, you can easily override the default templates and use you own. First configure an additional location for your templates and partials in your TypoScript for TYPO3 to look in:
