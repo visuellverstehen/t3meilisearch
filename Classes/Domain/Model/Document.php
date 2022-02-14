@@ -78,7 +78,7 @@ class Document extends AbstractDomainObject
 
     public static function createFromTSFE(TypoScriptFrontendController $tsfe): Document
     {
-        preg_match('/INDEX_CONTENT_START(.*)INDEX_CONTENT_END/s', $tsfe->content, $content);
+        preg_match('/<!--\s?INDEX_CONTENT_START(.*)INDEX_CONTENT_STOP\s?-->/s', $tsfe->content, $content);
 
         if (count($content) === 0) {
             // No marker comments are found so we take all from within the body
