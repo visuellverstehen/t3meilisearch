@@ -4,6 +4,8 @@ namespace VV\T3meilisearch\Service;
 
 use MeiliSearch\Client;
 use MeiliSearch\Search\SearchResult;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerAwareInterface;
 use Spatie\PdfToText\Pdf;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
@@ -11,8 +13,6 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use VV\T3meilisearch\Domain\Model\Document;
-use Psr\Log\LoggerAwareTrait;
-use Psr\Log\LoggerAwareInterface;
 
 class IndexService implements SingletonInterface, LoggerAwareInterface
 {
