@@ -68,9 +68,9 @@ class IndexService implements SingletonInterface
     public function checkForFiles(TypoScriptFrontendController $tsfe)
     {
         // Extract links to PDFs in fileadmin to parse
-        preg_match('/\/fileadmin(.*)\.pdf/s', $tsfe->content, $links);
+        preg_match_all('/\/fileadmin(.*)\.pdf/', $tsfe->content, $links);
 
-        foreach ($links as $link) {
+        foreach ($links[0] as $link) {
             $absolutePath = Environment::getPublicPath() . $link;
 
             try {
