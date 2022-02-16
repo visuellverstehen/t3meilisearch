@@ -35,15 +35,21 @@ class IndexService implements SingletonInterface
 
     public function add(Document $document)
     {
-        $index = $this->client->index($this->index);
-        $index->addDocuments($document->toArray());
+        if ($this->client->isHealthy()) {
+            $index = $this->client->index($this->index);
+            $index->addDocuments($document->toArray());
+        }
     }
 
-    public function search(string $query, array $params = []): SearchResult
+    public function search(string $query, array $params = []): ?SearchResult
     {
         $index = $this->client->index($this->index);
 
-        return $index->search($query, $params);
+        if ($this->client->isHealthy()) {
+            return $index->search($query, $params);
+        }
+
+        return null;
     }
 
     public function indexPageContent(array $parameters, TypoScriptFrontendController $tsfe)

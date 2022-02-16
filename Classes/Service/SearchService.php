@@ -44,9 +44,13 @@ class SearchService implements SingletonInterface
             'filter' => [
                 'rootPageId = ' . $GLOBALS['TSFE']->getSite()->getRootPageId(),
             ],
-        ])->getHits();
+        ]);
 
-        foreach ($hits as $hit) {
+        if ($hits === null) {
+            return $result;
+        }
+
+        foreach ($hits->getHits() as $hit) {
             $document = $this->propertyMapper->convert($hit, Document::class);
 
             $result->attach($document);
