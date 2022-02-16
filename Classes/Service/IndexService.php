@@ -11,9 +11,13 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use VV\T3meilisearch\Domain\Model\Document;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerAwareInterface;
 
-class IndexService implements SingletonInterface
+class IndexService implements SingletonInterface, LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     protected array $settings = [];
     protected Client $client;
     protected string $index = 'pages';
@@ -38,16 +42,20 @@ class IndexService implements SingletonInterface
         if ($this->client->isHealthy()) {
             $index = $this->client->index($this->index);
             $index->addDocuments($document->toArray());
+        } else {
+            $this->logger->warning('MeiliSearch is not healthy. Credentials correct?');
         }
     }
 
     public function search(string $query, array $params = []): ?SearchResult
     {
-        $index = $this->client->index($this->index);
-
         if ($this->client->isHealthy()) {
+            $index = $this->client->index($this->index);
+
             return $index->search($query, $params);
         }
+
+        $this->logger->warning('MeiliSearch is not healthy. Credentials correct?');
 
         return null;
     }
