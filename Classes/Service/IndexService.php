@@ -4,8 +4,8 @@ namespace VV\T3meilisearch\Service;
 
 use MeiliSearch\Client;
 use MeiliSearch\Search\SearchResult;
-use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Spatie\PdfToText\Pdf;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
