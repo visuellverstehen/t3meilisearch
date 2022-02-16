@@ -24,11 +24,13 @@ class IndexService implements SingletonInterface
         $this->client = new Client($this->settings['host'], $this->settings['apiKey']);
         $this->index = $this->settings['index'] ?? 'pages';
 
-        // TODO: Move this into an event listener or command and make
-        // settings public configurable
-        $this->client->index($this->index)->updateSettings([
-            'filterableAttributes' => ['rootPageId'],
-        ]);
+        if ($this->client->isHealthy()) {
+            // TODO: Move this into an event listener or command and make
+            // settings public configurable
+            $this->client->index($this->index)->updateSettings([
+                'filterableAttributes' => ['rootPageId'],
+            ]);
+        }
     }
 
     public function add(Document $document)
