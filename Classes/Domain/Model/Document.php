@@ -66,7 +66,7 @@ class Document extends AbstractDomainObject
 
     public function setContent(string $content): void
     {
-        $this->content = strip_tags($content);
+        $this->content = strip_tags($content, '<em>');
     }
 
     public function setFormatted(array $_formatted): void
