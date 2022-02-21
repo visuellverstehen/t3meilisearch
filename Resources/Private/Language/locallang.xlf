@@ -3,32 +3,32 @@
     <file source-language="en" datatype="plaintext" original="EXT:t3meilisearch/Resources/Private/Language/locallang.xlf" date="2022-02-07T11:23:42Z" product-name="t3meilisearch">
         <header/>
         <body>
-            <trans-unit id="host" xml:space="preserve">
+            <trans-unit id="host" resname="host">
                 <source>Host</source>
             </trans-unit>
-            <trans-unit id="api_key" xml:space="preserve">
+            <trans-unit id="api_key" resname="api_key">
                 <source>Enter your private API key</source>
             </trans-unit>
-            <trans-unit id="target_pid" xml:space="preserve">
+            <trans-unit id="target_pid" resname="target_pid">
                 <source>Target PID where the the search results live</source>
             </trans-unit>
-            <trans-unit id="index" xml:space="preserve">
+            <trans-unit id="index" resname="index">
                 <source>Index</source>
             </trans-unit>
-            <trans-unit id="empty_state" xml:space="preserve">
+            <trans-unit id="empty_state" resname="empty_state">
                 <source>No matching results found for your search request</source>
             </trans-unit>
 
-            <trans-unit id="pi1" xml:space="preserve">
+            <trans-unit id="pi1" resname="pi1">
                 <source>Searchform with results</source>
             </trans-unit>
-            <trans-unit id="pi1.description" xml:space="preserve">
+            <trans-unit id="pi1.description" resname="pi1.description">
                 <source>Shows an input for searching the index and displaying the results</source>
             </trans-unit>
-            <trans-unit id="pi2" xml:space="preserve">
+            <trans-unit id="pi2" resname="pi2">
                 <source>Searchform</source>
             </trans-unit>
-            <trans-unit id="pi2.description" xml:space="preserve">
+            <trans-unit id="pi2.description" resname="pi2.description">
                 <source>Only shows an input for searching the index and redirectes to the given target page uid</source>
             </trans-unit>
         </body>
