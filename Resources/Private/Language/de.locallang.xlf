@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" target-language="de" datatype="plaintext" original="EXT:t3meilisearch/Resources/Private/Language/locallang.xlf" date="2022-02-21T15:24:42Z" product-name="t3meilisearch">
+    <file source-language="en" datatype="plaintext" original="EXT:t3meilisearch/Resources/Private/Language/locallang.xlf" date="2022-02-21T15:24:42Z" product-name="t3meilisearch" target-language="de">
         <header/>
         <body>
-            <trans-unit id="host" resname="no_modules_registered">
+            <trans-unit id="host" resname="host" approved="yes">
                 <source>Host</source>
                 <target>Host</target>
             </trans-unit>
-            <trans-unit id="api_key" resname="no_modules_registered">
+            <trans-unit id="api_key" resname="api_key" approved="yes">
                 <source>Enter your private API key</source>
                 <target>Gebe deinen privaten API-Schlüssel ein</target>
             </trans-unit>
-            <trans-unit id="target_pid" resname="no_modules_registered">
+            <trans-unit id="target_pid" resname="target_pid" approved="yes">
                 <source>Target PID where the the search results live</source>
                 <target>Ziel-PID, wo die Suchergebnisse angezeigt werden</target>
             </trans-unit>
-            <trans-unit id="index" resname="no_modules_registered">
+            <trans-unit id="index" resname="index" approved="yes">
                 <source>Index</source>
                 <target>Index</target>
             </trans-unit>
-            <trans-unit id="empty_state" resname="no_modules_registered">
+            <trans-unit id="empty_state" resname="empty_state" approved="yes">
                 <source>No matching results found for your search request</source>
                 <target>Keine passenden Suchergebnisse gefunden</target>
             </trans-unit>
 
-            <trans-unit id="pi1" resname="no_modules_registered">
+            <trans-unit id="pi1" resname="pi1" approved="yes">
                 <source>Searchform with results</source>
                 <target>Suchformular mit Ergebnissen</target>
             </trans-unit>
-            <trans-unit id="pi1.description" resname="no_modules_registered">
+            <trans-unit id="pi1.description" resname="pi1.description" approved="yes">
                 <source>Shows an input for searching the index and displaying the results</source>
                 <target>Zeigt ein Eingabefeld zum Suchen an und listet Suchergebnisse auf</target>
             </trans-unit>
-            <trans-unit id="pi2" resname="no_modules_registered">
+            <trans-unit id="pi2" resname="pi2" approved="yes">
                 <source>Searchform</source>
                 <target>Suchformular</target>
             </trans-unit>
-            <trans-unit id="pi2.description" resname="no_modules_registered">
+            <trans-unit id="pi2.description" resname="pi2.description" approved="yes">
                 <source>Only shows an input for searching the index and redirectes to the given target page uid</source>
                 <target>Zeigt nur ein Eingabefeld zum Suchen an, welches auf die Seite der eingestellten PID weiterleitet</target>
             </trans-unit>

@@ -3,32 +3,32 @@
     <file source-language="en" datatype="plaintext" original="EXT:t3meilisearch/Resources/Private/Language/locallang.xlf" date="2022-02-07T11:23:42Z" product-name="t3meilisearch">
         <header/>
         <body>
-            <trans-unit id="host" resname="no_modules_registered">
+            <trans-unit id="host" xml:space="preserve">
                 <source>Host</source>
             </trans-unit>
-            <trans-unit id="api_key" resname="no_modules_registered">
+            <trans-unit id="api_key" xml:space="preserve">
                 <source>Enter your private API key</source>
             </trans-unit>
-            <trans-unit id="target_pid" resname="no_modules_registered">
+            <trans-unit id="target_pid" xml:space="preserve">
                 <source>Target PID where the the search results live</source>
             </trans-unit>
-            <trans-unit id="index" resname="no_modules_registered">
+            <trans-unit id="index" xml:space="preserve">
                 <source>Index</source>
             </trans-unit>
-            <trans-unit id="empty_state" resname="no_modules_registered">
+            <trans-unit id="empty_state" xml:space="preserve">
                 <source>No matching results found for your search request</source>
             </trans-unit>
 
-            <trans-unit id="pi1" resname="no_modules_registered">
+            <trans-unit id="pi1" xml:space="preserve">
                 <source>Searchform with results</source>
             </trans-unit>
-            <trans-unit id="pi1.description" resname="no_modules_registered">
+            <trans-unit id="pi1.description" xml:space="preserve">
                 <source>Shows an input for searching the index and displaying the results</source>
             </trans-unit>
-            <trans-unit id="pi2" resname="no_modules_registered">
+            <trans-unit id="pi2" xml:space="preserve">
                 <source>Searchform</source>
             </trans-unit>
-            <trans-unit id="pi2.description" resname="no_modules_registered">
+            <trans-unit id="pi2.description" xml:space="preserve">
                 <source>Only shows an input for searching the index and redirectes to the given target page uid</source>
             </trans-unit>
         </body>
