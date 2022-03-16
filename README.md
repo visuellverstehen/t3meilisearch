@@ -126,6 +126,20 @@ When there are old or unwanted results, you can easily remove the documents by e
 curl -H 'Authorization: Bearer yourApiKey' -X DELETE 'http://localhost:7700/indexes/pages/documents/:id'
 ```
 
+### Add sorting option
+
+By default t3meilisearch sorts the results by crdate (filetime for PDFs) descending. You can add simple sorting options by adding a select:
+
+```html
+<select name="sorting">
+    <option selected disabled>Sorting</option>
+    <option value="crdate_desc" {f:if(condition: '{queryParams.sorting} === "crdate_desc" || !{queryParams.sorting}', then: 'selected')}>New first</option>
+    <option value="crdate_asc" {f:if(condition: '{queryParams.sorting} === "crdate_asc"', then: 'selected')}>Old first</option>
+</select>
+```
+
+It is important that the sorting value is passed by the query key called `sorting`. The value is composed by `column-to-sort_direction-to-sort`. If you want more complex sorting you have to do it yourself.
+
 ---
 
 Meilisearch has an easy API to use: [docs.meilisearch.com](https://docs.meilisearch.com/reference/api/)

@@ -13,6 +13,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class Document extends AbstractDomainObject
 {
     protected string $id = '';
+    protected int $crdate = 0;
     protected int $rootPageId = 0;
     protected string $title = '';
     protected string $url = '';
@@ -27,6 +28,16 @@ class Document extends AbstractDomainObject
     public function setId(string $id): void
     {
         $this->id = $id;
+    }
+
+    public function getCrdate(): int
+    {
+        return $this->crdate;
+    }
+
+    public function setCrdate(int $crdate): void
+    {
+        $this->crdate = $crdate;
     }
 
     public function getRootPageId(): int
@@ -91,6 +102,7 @@ class Document extends AbstractDomainObject
         $document->setContent($content[0] ?? '');
         $document->setTitle($tsfe->page['title'] ?? '');
         $document->setUrl($tsfe->cObj->getRequest()->getUri());
+        $document->setCrdate($tsfe->page['crdate']);
 
         return $document;
     }
@@ -99,6 +111,7 @@ class Document extends AbstractDomainObject
     {
         return [
             'id' => $this->id,
+            'crdate' => $this->crdate,
             'rootPageId' => $this->rootPageId,
             'title' => $this->title,
             'url' => $this->url,

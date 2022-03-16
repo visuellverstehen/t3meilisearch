@@ -33,6 +33,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
             // settings public configurable
             $this->client->index($this->index)->updateSettings([
                 'filterableAttributes' => ['rootPageId'],
+                'sortableAttributes' => ['crdate'],
             ]);
         }
     }
@@ -92,6 +93,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
             $document->setUrl($link);
             $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
             $document->setContent($content);
+            $document->setCrdate(filemtime($absolutePath));
 
             $this->add($document);
         }

@@ -18,7 +18,7 @@ class SearchService implements SingletonInterface
         $this->propertyMapper = $propertyMapper;
     }
 
-    public function search(string $query): ObjectStorage
+    public function search(string $query, string $sorting = 'crdate_desc'): ObjectStorage
     {
         $result = new ObjectStorage();
 
@@ -33,12 +33,17 @@ class SearchService implements SingletonInterface
             return $result;
         }
 
+        [$sortingColumn, $sortingDesc] = explode('_', $sorting);
+
         $hits = $this->indexService->search($query, [
             'attributesToCrop' => [
                 'content',
             ],
             'attributesToHighlight' => [
                 'content',
+            ],
+            'sort' => [
+                $sortingColumn . ':' . strtolower($sortingDesc),
             ],
             // Filter by checking the rootPageId is in the rootline
             'filter' => [

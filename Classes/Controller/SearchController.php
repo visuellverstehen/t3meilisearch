@@ -22,8 +22,9 @@ class SearchController extends ActionController
         $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('t3meilisearch');
         $queryParams = $this->request->getQueryParams();
         $query = $queryParams['query'] ?? '';
+        $sorting = $queryParams['sorting'] ?? 'crdate_desc';
 
-        $results = $this->searchService->search($query);
+        $results = $this->searchService->search($query, $sorting);
 
         $this->view->assignMultiple(compact(
             'settings',
