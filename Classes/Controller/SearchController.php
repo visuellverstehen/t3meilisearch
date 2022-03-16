@@ -20,7 +20,8 @@ class SearchController extends ActionController
     public function searchAction(): ResponseInterface
     {
         $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('t3meilisearch');
-        $query = $this->request->getQueryParams()['query'] ?? '';
+        $queryParams = $this->request->getQueryParams();
+        $query = $queryParams['query'] ?? '';
 
         $results = $this->searchService->search($query);
 
@@ -28,6 +29,7 @@ class SearchController extends ActionController
             'settings',
             'query',
             'results',
+            'queryParams',
         ));
 
         return $this->htmlResponse();
