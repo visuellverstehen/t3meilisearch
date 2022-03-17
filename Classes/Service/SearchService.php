@@ -36,7 +36,7 @@ class SearchService implements SingletonInterface
 
         [$sortingColumn, $sortingDesc] = explode('_', $sorting);
 
-        foreach($types as $type) {
+        foreach ($types as $type) {
             $typesFilter[] = 'type = ' . strtolower($type);
         }
 
