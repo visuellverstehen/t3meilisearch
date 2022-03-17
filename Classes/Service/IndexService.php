@@ -32,7 +32,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
             // TODO: Move this into an event listener or command and make
             // settings public configurable
             $this->client->index($this->index)->updateSettings([
-                'filterableAttributes' => ['rootPageId'],
+                'filterableAttributes' => ['rootPageId', 'type'],
                 'sortableAttributes' => ['crdate'],
             ]);
         }
@@ -93,6 +93,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
             $document->setUrl($link);
             $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
             $document->setContent($content);
+            $document->setType('pdf');
             $document->setCrdate(filemtime($absolutePath));
 
             $this->add($document);

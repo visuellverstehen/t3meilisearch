@@ -18,9 +18,10 @@ class SearchService implements SingletonInterface
         $this->propertyMapper = $propertyMapper;
     }
 
-    public function search(string $query, string $sorting = 'crdate_desc'): ObjectStorage
+    public function search(string $query, string $sorting = 'crdate_desc', array $types = []): ObjectStorage
     {
         $result = new ObjectStorage();
+        $typesFilter = [];
 
         if ($query === '') {
             return $result;
@@ -35,6 +36,10 @@ class SearchService implements SingletonInterface
 
         [$sortingColumn, $sortingDesc] = explode('_', $sorting);
 
+        foreach($types as $type) {
+            $typesFilter[] = 'type = ' . strtolower($type);
+        }
+
         $hits = $this->indexService->search($query, [
             'attributesToCrop' => [
                 'content',
@@ -48,6 +53,7 @@ class SearchService implements SingletonInterface
             // Filter by checking the rootPageId is in the rootline
             'filter' => [
                 'rootPageId = ' . $GLOBALS['TSFE']->getSite()->getRootPageId(),
+                $typesFilter,
             ],
         ]);
 

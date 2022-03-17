@@ -23,8 +23,10 @@ class SearchController extends ActionController
         $queryParams = $this->request->getQueryParams();
         $query = $queryParams['query'] ?? '';
         $sorting = $queryParams['sorting'] ?? 'crdate_desc';
+        $types = $queryParams['types'] ?? [];
 
-        $results = $this->searchService->search($query, $sorting);
+        // TODO: Maybe create a SearchRequestDTO
+        $results = $this->searchService->search($query, $sorting, $types);
 
         $this->view->assignMultiple(compact(
             'settings',

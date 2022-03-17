@@ -18,6 +18,7 @@ class Document extends AbstractDomainObject
     protected string $title = '';
     protected string $url = '';
     protected string $content = '';
+    protected string $type = '';
     protected array $_formatted = [];
 
     public function getId(): string
@@ -80,6 +81,16 @@ class Document extends AbstractDomainObject
         $this->content = strip_tags($content, '<em>');
     }
 
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): void
+    {
+        $this->type = strtolower($type);
+    }
+
     public function setFormatted(array $_formatted): void
     {
         if ($_formatted['content']) {
@@ -100,6 +111,7 @@ class Document extends AbstractDomainObject
         $document->setId(md5($tsfe->cObj->getRequest()->getUri()));
         $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
         $document->setContent($content[0] ?? '');
+        $document->setType('page');
         $document->setTitle($tsfe->page['title'] ?? '');
         $document->setUrl($tsfe->cObj->getRequest()->getUri());
         $document->setCrdate($tsfe->page['crdate']);
@@ -116,6 +128,7 @@ class Document extends AbstractDomainObject
             'title' => $this->title,
             'url' => $this->url,
             'content' => $this->content,
+            'type' => $this->type,
         ];
     }
 }

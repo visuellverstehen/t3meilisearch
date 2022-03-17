@@ -140,6 +140,15 @@ By default t3meilisearch sorts the results by crdate (filetime for PDFs) descend
 
 It is important that the sorting value is passed by the query key called `sorting`. The value is composed by `column-to-sort_direction-to-sort`. If you want more complex sorting you have to do it yourself.
 
+### Add type filtering
+
+By default we add a two type to documents. `page` for normale page content and `pdf` for PDF files. You could index records yourself and add custom types. Filtering for types can be achieved by passing a `types` parameter:
+
+```html
+<input class="filter__input" type="checkbox" id="type-page" name="types[]" value="page" {f:if(condition: '"page" == {type}', then: 'checked') -> f:for(each: '{queryParams.types}', as: 'type')}>
+<label class="filter__label" for="type-page">Allgemein</label>
+```
+
 ---
 
 Meilisearch has an easy API to use: [docs.meilisearch.com](https://docs.meilisearch.com/reference/api/)
