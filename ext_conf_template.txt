@@ -8,4 +8,4 @@ apiKey=
 targetPid=
 
 # cat=General; type=string; label=LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:index
-index=pages
+index=documents

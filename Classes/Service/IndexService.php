@@ -20,13 +20,13 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
 
     protected array $settings = [];
     protected Client $client;
-    protected string $index = 'pages';
+    protected string $index = 'documents';
 
     public function __construct()
     {
         $this->settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('t3meilisearch');
         $this->client = new Client($this->settings['host'], $this->settings['apiKey']);
-        $this->index = $this->settings['index'] ?? 'pages';
+        $this->index = $this->settings['index'] ?? 'documents';
 
         if ($this->client->isHealthy()) {
             // TODO: Move this into an event listener or command and make

@@ -113,7 +113,7 @@ You can disable the »Include in Search« checkbox when editing a page to preven
 Want a clear start? You can simply execute a HTTP request to drop the index:
 
 ```bash
-curl -H 'Authorization: Bearer yourApiKey' -X DELETE 'http://localhost:7700/indexes/pages'
+curl -H 'Authorization: Bearer yourApiKey' -X DELETE 'http://localhost:7700/indexes/documents'
 ```
 
 A new index with the name configured in `$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['t3meilisearch']['index']` will be created by t3meilisearch.
@@ -123,7 +123,7 @@ A new index with the name configured in `$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS
 When there are old or unwanted results, you can easily remove the documents by executing a HTTP request. First find the `id` of the document by searching through the Meilisearch dashboard. Then you can execute the following request to delete a document:
 
 ```bash
-curl -H 'Authorization: Bearer yourApiKey' -X DELETE 'http://localhost:7700/indexes/pages/documents/:id'
+curl -H 'Authorization: Bearer yourApiKey' -X DELETE 'http://localhost:7700/indexes/documents/documents/:id'
 ```
 
 ### Add sorting option
