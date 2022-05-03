@@ -107,7 +107,7 @@ class Document extends AbstractDomainObject
             preg_match('/<body>(.*?)<\/body>/s', $tsfe->content, $content);
         }
 
-        // Remove query and fragements from URL
+        // Remove query and fragments from URL
         $uri = $tsfe->cObj->getRequest()->getUri();
         $url = $uri->getScheme() . '://' . $uri->getAuthority();
         $path = $uri->getPath();
