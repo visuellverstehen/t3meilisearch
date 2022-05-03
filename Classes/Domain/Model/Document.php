@@ -107,13 +107,22 @@ class Document extends AbstractDomainObject
             preg_match('/<body>(.*?)<\/body>/s', $tsfe->content, $content);
         }
 
+        // Remove query and fragements from URL
+        $uri = $tsfe->cObj->getRequest()->getUri();
+        $url = $uri->getScheme() . '://' . $uri->getAuthority();
+        $path = $uri->getPath();
+        if ($path !== '' && !str_starts_with($path, '/')) {
+            $path = '/' . $path;
+        }
+        $url .= $path;
+
         $document = new Document();
-        $document->setId(md5($tsfe->cObj->getRequest()->getUri()));
+        $document->setId(md5($url));
         $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
         $document->setContent($content[0] ?? '');
         $document->setType('page');
         $document->setTitle($tsfe->page['title'] ?? '');
-        $document->setUrl($tsfe->cObj->getRequest()->getUri());
+        $document->setUrl($url);
         $document->setCrdate($tsfe->page['crdate']);
 
         return $document;
