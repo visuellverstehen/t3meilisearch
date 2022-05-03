@@ -111,7 +111,7 @@ class Document extends AbstractDomainObject
         $uri = $tsfe->cObj->getRequest()->getUri();
         $url = $uri->getScheme() . '://' . $uri->getAuthority();
         $path = $uri->getPath();
-        if ($path !== '' && !str_starts_with($path, '/')) {
+        if ($path !== '' && ! str_starts_with($path, '/')) {
             $path = '/' . $path;
         }
         $url .= $path;
