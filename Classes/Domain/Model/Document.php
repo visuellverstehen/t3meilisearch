@@ -116,10 +116,8 @@ class Document extends AbstractDomainObject
         }
         $url .= $path;
 
-        // Remove last / from url
-        if (substr_compare($url, '/', -strlen('/')) === 0) {
-            $url = substr($url, 0, -1);
-        }
+        // Remove trailing slashes from URL
+        $url = rtrim($url, '/');
 
         $document = new Document();
         $document->setId(md5($url));
