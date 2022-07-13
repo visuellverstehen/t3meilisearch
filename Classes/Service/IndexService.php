@@ -28,35 +28,46 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
         $this->client = new Client($this->settings['host'], $this->settings['apiKey']);
         $this->index = $this->settings['index'] ?? 'documents';
 
-        if ($this->client->isHealthy()) {
-            // TODO: Move this into an event listener or command and make
-            // settings public configurable
-            $this->client->index($this->index)->updateSettings([
-                'filterableAttributes' => ['rootPageId', 'type'],
-                'sortableAttributes' => ['crdate'],
-            ]);
+        // TODO: Move this into an event listener or command and make
+        // settings public configurable
+        try {
+            if ($this->client->isHealthy()) {
+                $this->client->index($this->index)->updateSettings([
+                    'filterableAttributes' => ['rootPageId', 'type'],
+                    'sortableAttributes' => ['crdate'],
+                ]);
+            }
+        } catch (\Throwable $throwable) {
         }
     }
 
     public function add(Document $document)
     {
-        if ($this->client->isHealthy()) {
-            $index = $this->client->index($this->index);
-            $index->addDocuments($document->toArray());
-        } else {
-            $this->logger->warning('MeiliSearch is not healthy. Credentials correct?');
+        try {
+            if ($this->client->isHealthy()) {
+                $index = $this->client->index($this->index);
+                $index->addDocuments($document->toArray());
+            } else {
+                $this->logger->warning('MeiliSearch is not healthy.');
+            }
+        } catch (\Throwable $throwable) {
+            $this->logger->error('Something is wrong with MeiliSearch: ' . $throwable->getMessage());
         }
     }
 
     public function search(string $query, array $params = []): ?SearchResult
     {
-        if ($this->client->isHealthy()) {
-            $index = $this->client->index($this->index);
+        try {
+            if ($this->client->isHealthy()) {
+                $index = $this->client->index($this->index);
 
-            return $index->search($query, $params);
+                return $index->search($query, $params);
+            } else {
+                $this->logger->warning('MeiliSearch is not healthy.');
+            }
+        } catch (\Throwable $throwable) {
+            $this->logger->error('Something is wrong with MeiliSearch: ' . $throwable->getMessage());
         }
-
-        $this->logger->warning('MeiliSearch is not healthy. Credentials correct?');
 
         return null;
     }
