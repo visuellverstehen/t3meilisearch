@@ -52,7 +52,7 @@ targetPid=56
 
 ### Index
 
-You an define a custom index by replacing the default value provided by t3meilisearch.
+You can define a custom index by replacing the default value provided by t3meilisearch.
 
 Example:
 
