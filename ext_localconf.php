@@ -37,6 +37,7 @@ ExtensionUtility::configurePlugin(
 // Show core checkbox to exclude pages from indexing
 ExtensionManagementUtility::addPageTSConfig('
     TCEFORM.pages.no_search.disabled = 0
+    TCEFORM.pages.no_index.disabled = 0
 ');
 
 // Add content elements for plugins

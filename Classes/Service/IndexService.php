@@ -74,7 +74,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
 
     public function indexPageContent(array $parameters, TypoScriptFrontendController $tsfe)
     {
-        if ((int) $tsfe->page['no_search'] === 1) {
+        if ((int) $tsfe->page['no_search'] === 1 || (int) $tsfe->page['no_index'] === 1) {
             return;
         }
 
