@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-defined('TYPO3') or die();
+defined('TYPO3') or defined('TYPO3_MODE') or die();
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
