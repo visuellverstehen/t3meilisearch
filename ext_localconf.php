@@ -7,7 +7,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use VV\T3meilisearch\Controller\SearchController;
 use VV\T3meilisearch\Service\IndexService;
 
-defined('TYPO3') or die();
+defined('TYPO3') or defined('TYPO3_MODE') or die();
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-cached']['t3meilisearch']
     = IndexService::class . '->indexPageContent';
