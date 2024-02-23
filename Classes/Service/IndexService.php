@@ -46,7 +46,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
         try {
             if ($this->client->isHealthy()) {
                 $index = $this->client->index($this->index);
-                $index->addDocuments($document->toArray());
+                $index->addDocuments($document->toArray(), 'id');
             } else {
                 $this->logger->warning('MeiliSearch is not healthy.');
             }
