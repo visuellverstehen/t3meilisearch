@@ -27,13 +27,6 @@ class SearchService implements SingletonInterface
             return $result;
         }
 
-        // Do not try to search when caching is disabled
-        // We might have no index ready and an exception
-        // would occur
-        if ($GLOBALS['TSFE']->no_cache === true) {
-            return $result;
-        }
-
         [$sortingColumn, $sortingDesc] = explode('_', $sorting);
 
         foreach ($types as $type) {
