@@ -20,6 +20,7 @@ class Document extends AbstractDomainObject
     protected string $content = '';
     protected string $type = '';
     protected array $_formatted = [];
+    protected int $languageId = 0;
 
     public function getId(): string
     {
@@ -91,6 +92,16 @@ class Document extends AbstractDomainObject
         $this->type = strtolower($type);
     }
 
+    public function getLanguageId(): int
+    {
+        return $this->languageId;
+    }
+
+    public function setLanguageId(int $languageId): void
+    {
+        $this->languageId = $languageId;
+    }
+
     public function setFormatted(array $_formatted): void
     {
         if ($_formatted['content']) {
@@ -127,6 +138,7 @@ class Document extends AbstractDomainObject
         $document->setTitle($tsfe->page['title'] ?? '');
         $document->setUrl($url);
         $document->setCrdate($tsfe->page['crdate']);
+        $document->setLanguageId(0);
 
         return $document;
     }
@@ -141,6 +153,7 @@ class Document extends AbstractDomainObject
             'url' => $this->url,
             'content' => $this->content,
             'type' => $this->type,
+            'languageId' => $this->languageId,
         ];
     }
 }

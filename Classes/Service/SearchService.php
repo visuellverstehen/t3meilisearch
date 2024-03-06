@@ -46,6 +46,7 @@ class SearchService implements SingletonInterface
             // Filter by checking the rootPageId is in the rootline
             'filter' => [
                 'rootPageId = ' . $GLOBALS['TSFE']->getSite()->getRootPageId(),
+                'languageId IN [-1,' . $GLOBALS['TSFE']->getLanguage()->getLanguageId() .']',
                 $typesFilter,
             ],
         ]);
