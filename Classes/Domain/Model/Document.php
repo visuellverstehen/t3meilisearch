@@ -118,6 +118,12 @@ class Document extends AbstractDomainObject
             preg_match('/<body>(.*?)<\/body>/s', $tsfe->content, $content);
         }
 
+        // Remove code that shouldn't be indexed
+        $content = preg_replace('/<select(.*?)<\/select>/s', '', $content);
+        $content = preg_replace('/<input(.*?)\/>/s', '', $content);
+        $content = preg_replace('/<label(.*?)\/label>/s', '', $content);
+        $content = preg_replace('/<svg(.*?)\/svg>/s', '', $content);
+
         // Remove query and fragments from URL
         $uri = $tsfe->cObj->getRequest()->getUri();
         $url = $uri->getScheme() . '://' . $uri->getAuthority();
