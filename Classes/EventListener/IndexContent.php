@@ -5,13 +5,13 @@ declare(strict_types = 1);
 namespace VV\T3meilisearch\EventListener;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Event\AfterCachedPageIsPersistedEvent;
+use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
 use VV\T3meilisearch\Domain\Model\Document;
 use VV\T3meilisearch\Service\IndexService;
 
 class IndexContent
 {
-    public function __invoke(AfterCachedPageIsPersistedEvent $event): void
+    public function __invoke(AfterCacheableContentIsGeneratedEvent $event): void
     {
         // Only do this when caching is enabled
         if ($event->isCachingEnabled() === false) {
