@@ -2,11 +2,11 @@
 
 namespace VV\T3meilisearch\EventListener;
 
+use MeiliSearch\Client;
 use TYPO3\CMS\Backend\Backend\Event\SystemInformationToolbarCollectorEvent;
 use TYPO3\CMS\Backend\Toolbar\Enumeration\InformationStatus;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use MeiliSearch\Client;
 
 class AddVersionToSystemInformationToolbar
 {
@@ -20,7 +20,7 @@ class AddVersionToSystemInformationToolbar
             'Meilisearch Version',
             $version,
             'actions-search',
-           InformationStatus::STATUS_NOTICE
+            InformationStatus::STATUS_NOTICE
         );
     }
 }
