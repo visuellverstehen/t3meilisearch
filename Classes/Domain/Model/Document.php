@@ -20,6 +20,7 @@ class Document extends AbstractDomainObject
     protected string $content = '';
     protected string $type = '';
     protected array $_formatted = [];
+    protected int $languageId = 0;
 
     public function getId(): string
     {
@@ -91,6 +92,16 @@ class Document extends AbstractDomainObject
         $this->type = strtolower($type);
     }
 
+    public function getLanguageId(): int
+    {
+        return $this->languageId;
+    }
+
+    public function setLanguageId(int $languageId): void
+    {
+        $this->languageId = $languageId;
+    }
+
     public function setFormatted(array $_formatted): void
     {
         if ($_formatted['content']) {
@@ -107,6 +118,12 @@ class Document extends AbstractDomainObject
             preg_match('/<body>(.*?)<\/body>/s', $tsfe->content, $content);
         }
 
+        // Remove code that shouldn't be indexed
+        $content = preg_replace('/<select(.*?)<\/select>/s', '', $content);
+        $content = preg_replace('/<input(.*?)\/>/s', '', $content);
+        $content = preg_replace('/<label(.*?)\/label>/s', '', $content);
+        $content = preg_replace('/<svg(.*?)\/svg>/s', '', $content);
+
         // Remove query and fragments from URL
         $uri = $tsfe->cObj->getRequest()->getUri();
         $url = $uri->getScheme() . '://' . $uri->getAuthority();
@@ -122,11 +139,12 @@ class Document extends AbstractDomainObject
         $document = new Document();
         $document->setId(md5($url));
         $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
-        $document->setContent($content[0] ?? '');
+        $document->setContent(implode(PHP_EOL, $content ?? []));
         $document->setType('page');
         $document->setTitle($tsfe->page['title'] ?? '');
         $document->setUrl($url);
         $document->setCrdate($tsfe->page['crdate']);
+        $document->setLanguageId($tsfe->getLanguage()->getLanguageId() ?? 0);
 
         return $document;
     }
@@ -141,6 +159,7 @@ class Document extends AbstractDomainObject
             'url' => $this->url,
             'content' => $this->content,
             'type' => $this->type,
+            'languageId' => $this->languageId,
         ];
     }
 }

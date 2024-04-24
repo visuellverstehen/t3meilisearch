@@ -33,7 +33,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
         try {
             if ($this->client->isHealthy()) {
                 $this->client->index($this->index)->updateSettings([
-                    'filterableAttributes' => ['rootPageId', 'type'],
+                    'filterableAttributes' => ['rootPageId', 'type', 'languageId'],
                     'sortableAttributes' => ['crdate'],
                 ]);
             }
@@ -46,7 +46,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
         try {
             if ($this->client->isHealthy()) {
                 $index = $this->client->index($this->index);
-                $index->addDocuments($document->toArray());
+                $index->addDocuments($document->toArray(), 'id');
             } else {
                 $this->logger->warning('MeiliSearch is not healthy.');
             }
@@ -106,6 +106,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
             $document->setContent($content);
             $document->setType('pdf');
             $document->setCrdate(filemtime($absolutePath));
+            $document->setLanguageId(-1);
 
             $this->add($document);
         }
