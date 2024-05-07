@@ -10,3 +10,7 @@ services:
   VV\T3meilisearch\EventListener\IndexContent:
     tags:
       - name: event.listener
+
+  VV\T3meilisearch\EventListener\AddVersionToSystemInformationToolbar:
+   tags:
+      - name: event.listener
