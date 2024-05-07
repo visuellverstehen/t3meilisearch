@@ -6,3 +6,7 @@ services:
 
   VV\T3meilisearch\:
     resource: '../Classes/*'
+
+  VV\T3meilisearch\EventListener\AddVersionToSystemInformationToolbar:
+   tags:
+      - name: event.listener
