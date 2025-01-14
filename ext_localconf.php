@@ -60,7 +60,7 @@ ExtensionManagementUtility::addPageTSConfig('
                 description = LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:pi2.description
                 tt_content_defValues {
                     CType = list
-                    list_type = t3meilisearch_pi1
+                    list_type = t3meilisearch_pi2
                 }
                 saveAndClose = true
             }
