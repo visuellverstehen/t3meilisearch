@@ -144,7 +144,7 @@ class Document extends AbstractDomainObject
         $document->setTitle($tsfe->page['title'] ?? '');
         $document->setUrl($url);
         $document->setCrdate($tsfe->page['crdate']);
-        $document->setLanguageId($tsfe->getLanguage()->getLanguageId() ?? 0);
+        $document->setLanguageId($GLOBALS['TYPO3_REQUEST']->getAttribute('language')->getLanguageId() ?? 0);
 
         return $document;
     }
