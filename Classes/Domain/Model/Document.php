@@ -138,7 +138,7 @@ class Document extends AbstractDomainObject
 
         $document = new Document();
         $document->setId(md5($url));
-        $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
+        $document->setRootPageId($GLOBALS['TYPO3_REQUEST']->getAttribute('site')->getRootPageId() ?? 0);
         $document->setContent(implode(PHP_EOL, $content ?? []));
         $document->setType('page');
         $document->setTitle($tsfe->page['title'] ?? '');
