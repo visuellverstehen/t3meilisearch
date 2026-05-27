@@ -1,0 +1,29 @@
+TCEFORM.pages.no_search.disabled = 0
+TCEFORM.pages.no_index.disabled = 0
+
+mod.wizards.newContentElement.wizardItems.forms {
+    elements {
+        search {
+            iconIdentifier = content-special-indexed_search
+            title = LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:pi1
+            description = LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:pi1.description
+            tt_content_defValues {
+                CType = list
+                list_type = t3meilisearch_pi1
+            }
+            saveAndClose = true
+        }
+        mini_search {
+            iconIdentifier = content-special-indexed_search
+            title = LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:pi2
+            description = LLL:EXT:t3meilisearch/Resources/Private/Language/locallang.xlf:pi2.description
+            tt_content_defValues {
+                CType = list
+                list_type = t3meilisearch_pi2
+            }
+            saveAndClose = true
+        }
+    }
+    show :=addToList(search)
+    show :=addToList(mini_search)
+}

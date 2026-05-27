@@ -102,7 +102,7 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
             $document = new Document();
             $document->setId(md5($link));
             $document->setUrl($link);
-            $document->setRootPageId($tsfe->getSite()->getRootPageId() ?? 0);
+            $document->setRootPageId($GLOBALS['TYPO3_REQUEST']->getAttribute('site')->getRootPageId() ?? 0);
             $document->setContent($content);
             $document->setType('pdf');
             $document->setCrdate(filemtime($absolutePath));

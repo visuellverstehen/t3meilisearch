@@ -13,6 +13,11 @@ class AddVersionToSystemInformationToolbar
     public function __invoke(SystemInformationToolbarCollectorEvent $event): void
     {
         $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('t3meilisearch');
+
+        if ($settings['host'] === '' || $settings['apiKey'] === '') {
+            return;
+        }
+
         $client = new Client($settings['host'], $settings['apiKey']);
         $version = $client->version()['pkgVersion'];
 
