@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use VV\T3meilisearch\Controller\SearchController;
-use VV\T3meilisearch\Service\IndexService;
 
 defined('TYPO3') or defined('TYPO3_MODE') or die();
 
