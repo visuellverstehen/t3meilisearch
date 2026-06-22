@@ -27,7 +27,7 @@ class IndexContent
         $indexService = GeneralUtility::makeInstance(IndexService::class);
 
         if ($event->getContent() !== '') {
-            $indexService->add(Document::createFromContent((string)$event->getContent()));
+            $indexService->add(Document::createFromContent((string) $event->getContent()));
         }
 
         $indexService->checkForFiles($event->getContent());
