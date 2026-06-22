@@ -18,18 +18,18 @@ class IndexContent
             return;
         }
 
-        $tsfe = $event->getController();
+        $page = $event->getRequest()->getAttribute('frontend.page.information')->getPageRecord();
 
-        if ((int) $tsfe->page['no_search'] === 1 || (int) $tsfe->page['no_index'] === 1) {
+        if ((int) $page['no_search'] === 1 || (int) $page['no_index'] === 1) {
             return;
         }
 
         $indexService = GeneralUtility::makeInstance(IndexService::class);
 
-        if ($tsfe->content !== '') {
-            $indexService->add(Document::createFromTSFE($tsfe));
+        if ($event->getContent() !== '') {
+            $indexService->add(Document::createFromContent($event->getContent()));
         }
 
-        $indexService->checkForFiles($tsfe);
+        $indexService->checkForFiles($event->getContent());
     }
 }

@@ -11,7 +11,6 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use VV\T3meilisearch\Domain\Model\Document;
 
 class IndexService implements SingletonInterface, LoggerAwareInterface
@@ -72,23 +71,10 @@ class IndexService implements SingletonInterface, LoggerAwareInterface
         return null;
     }
 
-    public function indexPageContent(array $parameters, TypoScriptFrontendController $tsfe)
-    {
-        if ((int) $tsfe->page['no_search'] === 1 || (int) $tsfe->page['no_index'] === 1) {
-            return;
-        }
-
-        if ($tsfe->content !== '') {
-            $this->add(Document::createFromTSFE($tsfe));
-        }
-
-        $this->checkForFiles($tsfe);
-    }
-
-    public function checkForFiles(TypoScriptFrontendController $tsfe)
+    public function checkForFiles(string $content)
     {
         // Extract links to PDFs in fileadmin to parse
-        preg_match_all('/\/fileadmin(.*?)\.pdf/', $tsfe->content, $links);
+        preg_match_all('/\/fileadmin(.*?)\.pdf/', $content, $links);
 
         foreach ($links[0] as $link) {
             $absolutePath = Environment::getPublicPath() . $link;
