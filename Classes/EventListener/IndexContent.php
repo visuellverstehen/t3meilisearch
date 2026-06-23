@@ -4,11 +4,13 @@ declare(strict_types = 1);
 
 namespace VV\T3meilisearch\EventListener;
 
+use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
 use VV\T3meilisearch\Domain\Model\Document;
 use VV\T3meilisearch\Service\IndexService;
 
+#[AsEventListener]
 class IndexContent
 {
     public function __invoke(AfterCacheableContentIsGeneratedEvent $event): void
