@@ -108,13 +108,13 @@ class Document extends AbstractDomainObject
         }
     }
 
-    public static function createFromContent(string $content): Document
+    public static function createFromContent(string $body): Document
     {
-        preg_match('/<!--\s?INDEX_CONTENT_START(.*)INDEX_CONTENT_STOP\s?-->/s', $content, $content);
+        preg_match('/<!--\s?INDEX_CONTENT_START(.*)INDEX_CONTENT_STOP\s?-->/s', $body, $content);
 
         if (count($content) === 0) {
             // No marker comments are found so we take all from within the body
-            preg_match('/<body>(.*?)<\/body>/s', $content, $content);
+            preg_match('/<body>(.*?)<\/body>/s', $body, $content);
         }
 
         // Remove code that shouldn't be indexed
