@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace VV\T3meilisearch\EventListener;
 
 use TYPO3\CMS\Core\Attribute\AsEventListener;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
 use VV\T3meilisearch\Domain\Model\Document;
@@ -26,12 +27,22 @@ class IndexContent
             return;
         }
 
+        $content = '';
+        $version = new Typo3Version();
         $indexService = GeneralUtility::makeInstance(IndexService::class);
 
-        if ($event->getContent() !== '') {
-            $indexService->add(Document::createFromContent((string) $event->getContent()));
+        if ($version->getMajorVersion() < 14) {
+            // @todo: Remove if() when TYPO3 v13 compatibility is dropped
+            $tsfe = $event->getController();
+            $content = (string) $tsfe->content;
+        } else {
+            $content = (string) $event->getContent();
         }
 
-        $indexService->checkForFiles($event->getContent());
+        if ($content !== '') {
+            $indexService->add(Document::createFromContent($content));
+        }
+
+        $indexService->checkForFiles($content);
     }
 }
