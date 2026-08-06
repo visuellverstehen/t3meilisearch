@@ -3,7 +3,6 @@
 namespace VV\T3meilisearch\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * This Document should only be a DTO but needs to extend
@@ -109,13 +108,13 @@ class Document extends AbstractDomainObject
         }
     }
 
-    public static function createFromTSFE(TypoScriptFrontendController $tsfe): Document
+    public static function createFromContent(string $body): Document
     {
-        preg_match('/<!--\s?INDEX_CONTENT_START(.*)INDEX_CONTENT_STOP\s?-->/s', $tsfe->content, $content);
+        preg_match('/<!--\s?INDEX_CONTENT_START(.*)INDEX_CONTENT_STOP\s?-->/s', $body, $content);
 
         if (count($content) === 0) {
             // No marker comments are found so we take all from within the body
-            preg_match('/<body>(.*?)<\/body>/s', $tsfe->content, $content);
+            preg_match('/<body>(.*?)<\/body>/s', $body, $content);
         }
 
         // Remove code that shouldn't be indexed
@@ -125,7 +124,7 @@ class Document extends AbstractDomainObject
         $content = preg_replace('/<svg(.*?)\/svg>/s', '', $content);
 
         // Remove query and fragments from URL
-        $uri = $tsfe->cObj->getRequest()->getUri();
+        $uri = $GLOBALS['TYPO3_REQUEST']->getUri();
         $url = $uri->getScheme() . '://' . $uri->getAuthority();
         $path = $uri->getPath();
         if ($path !== '' && ! str_starts_with($path, '/')) {
@@ -136,14 +135,16 @@ class Document extends AbstractDomainObject
         // Remove trailing slashes from URL
         $url = rtrim($url, '/');
 
+        $page = $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.page.information')->getPageRecord();
+
         $document = new Document();
         $document->setId(md5($url));
         $document->setRootPageId($GLOBALS['TYPO3_REQUEST']->getAttribute('site')->getRootPageId() ?? 0);
         $document->setContent(implode(PHP_EOL, $content ?? []));
         $document->setType('page');
-        $document->setTitle($tsfe->page['title'] ?? '');
+        $document->setTitle($page['title'] ?? '');
         $document->setUrl($url);
-        $document->setCrdate($tsfe->page['crdate']);
+        $document->setCrdate($page['crdate']);
         $document->setLanguageId($GLOBALS['TYPO3_REQUEST']->getAttribute('language')->getLanguageId() ?? 0);
 
         return $document;
